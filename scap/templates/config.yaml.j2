@@ -1,0 +1,56 @@
+# Number of worker processes to spawn.
+# Set to 0 to run everything in a single process without clustering.
+# Use 'ncpu' to run as many workers as there are CPU units
+num_workers: ncpu
+
+# Log error messages and gracefully restart a worker if v8 reports that it
+# uses more heap (note: not RSS) than this many mb.
+worker_heap_limit_mb: 750
+
+# The maximum interval in ms that can pass between two beat messages
+# sent by each worker to the master before it is killed
+worker_heartbeat_timeout: 15000
+
+# Logger info
+logging:
+  level: <%= log_level %>
+  name: <%= log_name %>
+  streams:
+    - host: <%= logstash_host %>
+      port: <%= logstash_port %>
+      type: gelf
+    - level: info
+      path: <%= log_file %>
+      type: file
+
+# Statsd metrics reporter
+metrics:
+  name: <%= metrics_name %>
+  host: <%= metrics_host %>
+  port: <%= metrics_port %>
+  type: statsd
+
+services:
+  - name: eventstreams
+    module: ./app.js
+    conf:
+      port: <%= port %>
+      # interface: localhost # uncomment to only listen on localhost
+      # more per-service config settings
+      # the location of the spec, defaults to spec.yaml if not specified
+      spec: <%= spec %>
+      # allow cross-domain requests to the API (default '*')
+      cors: '*'
+      # rdkafka configuration
+      kafka:
+        metadata.broker.list: <%= broker_list %>
+      # Stream routes configuration.  Each key in this object is a route path,
+      # and each route path should configure a list of topics to be included in that stream.
+      streams:
+<% for stream_name, stream_config in streams.iteritems() -%>
+        <%= stream_name %>:
+          topics:
+<% for topic in stream_config['topics'] -%>
+            - <%= topic %>
+<% end -%>
+<% end -%>

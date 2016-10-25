@@ -1,0 +1,12 @@
+---
+/etc/eventstreams/config.yaml:
+  template: config.yaml.j2
+  erb_syntax: True
+  remote_vars: /etc/eventstreams/config-vars.yaml
+
+# spec.yaml is rendered so that we can have a single source of truth (Puppet)
+# for configuring stream routes and their composite topics.
+/etc/eventstreams/spec.yaml:
+  template: spec.yaml.j2
+  erb_syntax: True
+  remote_vars: /etc/eventstreams/config-vars.yaml

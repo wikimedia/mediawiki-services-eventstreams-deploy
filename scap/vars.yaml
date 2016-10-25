@@ -1,0 +1,27 @@
+# log-related variables
+log_name: eventstreams
+log_level: info
+logstash_host: localhost
+logstash_port: 12201
+log_file: /tmp/eventstreams.log
+
+# metrics
+metrics_name: eventstreams
+metrics_host: localhost
+metrics_port: 8252
+
+# service
+name: eventstreams
+port: 8000
+spec: /etc/eventstreams/spec.yaml
+site: datacenter1
+broker_list: localhost:9092
+
+# Each of these will be configured as a route at /v1/stream/{name}.
+# spec.yaml will be rendered with these routes, and config.yaml
+# will be rendered with stream route topic configuration.
+streams:
+  test:
+    topics: [eqiad.test.event, codfw.test.event]
+  revision-create:
+    topics: [eqiad.mediawiki.revision-create, codfw.mediawiki.revision-create]

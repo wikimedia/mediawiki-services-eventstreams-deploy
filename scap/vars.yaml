@@ -12,7 +12,7 @@ metrics_port: 8252
 
 # service
 name: eventstreams
-port: 8000
+port: 8092
 spec: /etc/eventstreams/spec.yaml
 site: datacenter1
 broker_list: localhost:9092

@@ -20,11 +20,11 @@ paths:
     get:
 <% if stream_config.has_key('description') -%>
       description: <%= stream_config['description'] %>
-<% end -%>
+<% endif -%>
       produces:
         - text/event-stream
 
-<% end -%>
+<% endfor -%>
 
   # from routes/info.js
   /_info:

@@ -32,7 +32,7 @@ metrics:
 
 services:
   - name: eventstreams
-    module: ./app.js
+    module: ./src/app.js
     conf:
       port: <%= port %>
       # interface: localhost # uncomment to only listen on localhost
@@ -47,10 +47,10 @@ services:
       # Stream routes configuration.  Each key in this object is a route path,
       # and each route path should configure a list of topics to be included in that stream.
       streams:
-<% for stream_name, stream_config in streams.iteritems() -%>
+<% for stream_name, stream_config in streams.iteritems() %>
         <%= stream_name %>:
           topics:
-<% for topic in stream_config['topics'] -%>
+<% for topic in stream_config['topics'] %>
             - <%= topic %>
 <% endfor -%>
 <% endfor -%>

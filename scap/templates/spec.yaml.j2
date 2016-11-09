@@ -15,12 +15,12 @@ paths:
   # have an entry for this stream, it will not be configured as a real route, and requests
   # to the route will 404.
 
-<% for stream_name, stream_config in streams.iteritems() -%>
+<% for stream_name, stream_config in streams.iteritems() %>
   /v1/stream/<%= stream_name %>:
     get:
-<% if stream_config.has_key('description') -%>
+<% if stream_config.has_key('description') %>
       description: <%= stream_config['description'] %>
-<% endif -%>
+<% endif %>
       produces:
         - text/event-stream
 

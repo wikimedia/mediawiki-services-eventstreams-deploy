@@ -46,7 +46,7 @@ services:
         metadata.broker.list: <%= broker_list %>
 <% if rdkafka_config -%>
 <% for key, val in rdkafka_config.iteritems() -%>
-      <%= key %>: <%= val %>
+        <%= key %>: <%= val %>
 <% endfor -%>
 <% endif -%>
       # Stream routes configuration.  Each key in this object is a route path,

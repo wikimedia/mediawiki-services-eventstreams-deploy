@@ -45,7 +45,7 @@ services:
       kafka:
         metadata.broker.list: <%= broker_list %>
 <% if rdkafka_config -%>
-<% for key, val in rdkafka_config.iteritems() -%>
+<% for key, val in rdkafka_config.iteritems() %>
         <%= key %>: <%= val %>
 <% endfor -%>
 <% endif -%>

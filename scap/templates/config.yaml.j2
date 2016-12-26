@@ -46,7 +46,7 @@ services:
         metadata.broker.list: <%= broker_list %>
 <% for key, val in rdkafka_config.iteritems() -%>
       <%= key %>: <%= val %>
-<% end -%>
+<% endfor -%>
       # Stream routes configuration.  Each key in this object is a route path,
       # and each route path should configure a list of topics to be included in that stream.
       streams:

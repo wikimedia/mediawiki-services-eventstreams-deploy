@@ -48,7 +48,7 @@ services:
 <% for key, val in rdkafka_config.iteritems() -%>
       <%= key %>: <%= val %>
 <% endfor -%>
-<% end -%>
+<% endif -%>
       # Stream routes configuration.  Each key in this object is a route path,
       # and each route path should configure a list of topics to be included in that stream.
       streams:

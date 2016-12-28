@@ -1,0 +1,9 @@
+checks:
+  depool:
+    type: command
+    stage: promote
+    command: depool-eventstreams
+  repool:
+    type: command
+    stage: restart_service
+    command: pool-eventstreams

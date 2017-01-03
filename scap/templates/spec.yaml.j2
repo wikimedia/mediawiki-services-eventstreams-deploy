@@ -9,20 +9,17 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0
 paths:
 
-  # NOTE:  Each /v1/stream/ route you list here must also
-  # have a corresponding entry in the app config.yaml streams object that specifies
-  # the topics that belong to each of these streams.  If the streams config does not
-  # have an entry for this stream, it will not be configured as a real route, and requests
-  # to the route will 404.
+  # NOTE:  Each /v2/stream/ route here is configured from the app config.yaml streams
+  # config object that specifies which topics that belong to each streams.
 
 <% for stream_name, stream_config in streams.iteritems() %>
-  /v1/stream/<%= stream_name %>:
+  /v2/stream/<%= stream_name %>:
     get:
 <% if stream_config.has_key('description') %>
       description: <%= stream_config['description'] %>
 <% endif %>
       produces:
-        - text/event-stream
+        - text/event-stream; charset=utf-8
 
 <% endfor -%>
 

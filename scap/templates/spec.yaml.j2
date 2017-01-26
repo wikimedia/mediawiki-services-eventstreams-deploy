@@ -16,7 +16,7 @@ paths:
   /v2/stream/<%= stream_name %>:
     get:
 <% if stream_config.has_key('description') %>
-      description: <%= stream_config['description'] %>
+      description: "<%= stream_config['description'] %>"
 <% endif %>
       produces:
         - text/event-stream; charset=utf-8

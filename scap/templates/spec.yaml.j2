@@ -33,7 +33,11 @@ paths:
       tags:
         - Streams
 <% for key, val in stream_config.iteritems() %>
-      <%= key %>: <%= '"' + val + '"' if string(val) else val %>
+<% if val is string %>
+      <%= key %>: <%= '"' + val + '"' %>
+<% else %>
+      <%= key %>: <%= val %>
+<% endif %>
 <% endfor %>
       parameters:
         - "$ref": "#/definitions/Last-Event-ID"

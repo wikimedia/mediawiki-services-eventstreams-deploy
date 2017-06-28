@@ -15,7 +15,7 @@ name: eventstreams
 port: 8092
 spec: /etc/eventstreams/spec.yaml
 site: datacenter1
-broker_list: localhost:9092
+broker_list: '127.0.0.1:9092'
 
 # Each of these will be configured as a route at /v1/stream/{name}.
 # spec.yaml will be rendered with these routes, and config.yaml

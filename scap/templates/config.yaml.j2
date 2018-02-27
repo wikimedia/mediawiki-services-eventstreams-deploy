@@ -41,6 +41,7 @@ services:
       spec: <%= spec %>
       # allow cross-domain requests to the API (default '*')
       cors: '*'
+      csp: " default-src 'none'; script-src 'self' 'unsafe-inline'; connect-src *; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'"
       # rdkafka configuration
       kafka:
         metadata.broker.list: <%= broker_list %>

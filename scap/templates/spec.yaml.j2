@@ -20,12 +20,38 @@ definitions:
       to be part of this stream endpoint.
       Example: [{topic: datacenter1.topic, partition: 0, offset: 12345}, ...]
     type: array
+  since:
+    name: since
+    in: query
+    description: >
+      If given, this timestamp will be used as the historical starting position in
+      each the requested streams. since should either be an integer UTC milliseconds
+      unix epoch timestamp, or a string timestamp parseable by Date.parse().
+      If the timestamp given does not have any corresponding offsets, it will be ignored,
+      and the data will begin streaming from the latest position in the stream.
+      This parameter is ignored if Last-Event-ID is set with offsets (or timestamps)
+      for individual topic partition assignments, e.g. when resuming after a disconnect.
+      NOTE: Historical timestamp assignment is not supported indefinitely. Depending
+      on backend stream configuration, will likely be only one or a few weeks.
 
 
 
 paths:
   # NOTE:  Each /v2/stream/ route here is configured from the app config.yaml streams
   # config object that specifies which topics that belong to each streams.
+
+  /v2/stream/{streams}:
+    get:
+      tags:
+        - Streams
+      summary: Subscribe to one or multiple streams.
+      description: >
+        Use this route to subscribe to a comma separated list of configured streams.
+      parameters:
+        - "$ref": "#/definitions/Last-Event-ID"
+        - "$ref": "#/definitions/since"
+      produces:
+        - text/event-stream; charset=utf-8
 
 <% for stream_name, stream_config in streams.iteritems() %>
   /v2/stream/<%= stream_name %>:
@@ -41,6 +67,7 @@ paths:
 <% endfor %>
       parameters:
         - "$ref": "#/definitions/Last-Event-ID"
+        - "$ref": "#/definitions/since"
       produces:
         - text/event-stream; charset=utf-8
 

@@ -83,6 +83,7 @@ describe('Consumer/Producer', function() {
   });
 
   afterEach(function(done) {
+    this.timeout(6000);
     var finished = 0;
     var called = false;
 
@@ -296,8 +297,6 @@ describe('Consumer/Producer', function() {
 
               // check that no new messages arrive, as the offset was committed
               consumer.once('data', function(message) {
-                console.log('First message offset:', lastOffset, 'New message',
-                  'offset:', message.offset);
                 done(new Error('Should never be here'));
               });
 

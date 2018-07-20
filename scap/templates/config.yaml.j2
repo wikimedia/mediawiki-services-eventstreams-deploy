@@ -46,7 +46,9 @@ services:
       kafka:
         metadata.broker.list: <%= broker_list %>
         # TODO: move to ops/puppet for consistency
-        queued.max.messages.kbytes: 65535
+        queued.max.messages.kbytes: 32768
+        fetch.message.max.bytes: 8388608
+        queued.min.messages: 1000
 <% if rdkafka_config -%>
 <% for key, val in rdkafka_config.iteritems() %>
         <%= key %>: <%= val %>

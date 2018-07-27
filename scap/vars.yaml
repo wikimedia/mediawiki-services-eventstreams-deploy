@@ -1,6 +1,5 @@
 # log-related variables
 log_name: eventstreams
-log_level: info
 logstash_host: localhost
 logstash_port: 12201
 log_file: /tmp/eventstreams.log
